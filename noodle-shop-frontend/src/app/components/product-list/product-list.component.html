@@ -1,1 +1,4 @@
 <p>product-list works!</p>
+<p *ngFor="let productList of products">
+    {{ productList.name }}: {{ productList.unitPrice | currency:'USD' }}
+</p>
