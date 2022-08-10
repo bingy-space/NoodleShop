@@ -1,4 +1,16 @@
-<p>product-list works!</p>
-<p *ngFor="let productList of products">
-    {{ productList.name }}: {{ productList.unitPrice | currency:'USD' }}
-</p>
+<h2>Product List</h2>
+
+<div class="row row-cols-2 row-cols-md-4 g-2">
+    <div *ngFor="let productList of products">
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ productList.name }}</h5>
+                    <p class="card-text">{{ productList.unitPrice | currency:'USD' }}</p>
+                    <p class="card-text">Units In Stock: {{ productList.unitsInStock}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
