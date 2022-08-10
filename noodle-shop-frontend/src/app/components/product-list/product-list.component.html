@@ -4,7 +4,7 @@
     <div *ngFor="let productList of products">
         <div class="col">
             <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{{productList.imageUrl}}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ productList.name }}</h5>
                     <p class="card-text">{{ productList.unitPrice | currency:'USD' }}</p>
