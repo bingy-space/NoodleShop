@@ -10,13 +10,13 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Ramen Noodle</a>
+          <a routerLink="/category/1">Ramen Noodle</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Udon Noodle</a>
+          <a routerLink="/category/3">Udon Noodle</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Soba Noodle</a>
+          <a routerLink="/category/2">Soba Noodle</a>
         </li>
       </ul>
       <form class="d-flex">
@@ -33,6 +33,11 @@
 
 <div class="container">
   <h1 class="mt-3 mb-3">Products</h1>
+  <!-- Main Content -->
+  <!-- <app-product-list></app-product-list> -->
 
-  <app-product-list></app-product-list>
+  <!-- Router-outlet acts as a placeholder
+  Renders the desired component based on route -->
+  <router-outlet></router-outlet>
+
 </div>
