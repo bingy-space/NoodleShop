@@ -32,17 +32,19 @@ export class ProductListComponent implements OnInit {
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
     }else{
       // No category id available, default to category "id" 1
-      this.currentCategoryId = 1;
+      this.currentCategoryId = 0;
     }
 
-    // Method is invoked once you 'subscribe'
-    // this.productService.getProductList().subscribe(
-    //   data => {
-    //     // Assign results data to the Product array
-    //     this.products = data;
-    //     console.log(this.products)
-    //   }
-    // )
+    if(this.currentCategoryId == 0){
+      // Method is invoked once you 'subscribe'
+      this.productService.getAllProductList().subscribe(
+        data => {
+          // Assign results data to the Product array
+          this.products = data;
+          console.log(this.products)
+        }
+      )
+    }
 
     // Now get the products for the given category id
     this.productService.getProductList(this.currentCategoryId).subscribe(
