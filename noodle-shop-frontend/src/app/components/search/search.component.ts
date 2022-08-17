@@ -14,9 +14,9 @@ export class SearchComponent implements OnInit {
   }
 
   doSearch(value: string){
-    console.log(`value= ${value}`);
+    console.log(`value=${value}`);
     // Route the data to our "search" route
-    this.router.navigateByUrl('/search/${value}');
+    this.router.navigateByUrl(`/search/${value}`);
   }
 
 }
