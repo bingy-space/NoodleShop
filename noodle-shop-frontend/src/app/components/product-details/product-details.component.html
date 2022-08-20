@@ -1,1 +1,18 @@
-<p>product-details works!</p>
+
+<div class="row mt-5">
+    <div class="col-5">
+        <img src="{{ product.imageUrl }}" alt="" class="img-fluid">
+    </div>
+    <div class="col-7">
+        <h3>{{ product.name }}</h3>
+        <hr>
+        <p>Description</p>
+        <p>{{ product.description }}</p>
+
+        <h5>{{ product.unitPrice | currency: 'USD' }}</h5>
+
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" type="button">Add to Cart</a>
+        </div>
+    </div>
+  </div>
