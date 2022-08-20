@@ -41,11 +41,20 @@ export class ProductService {
     return this.getProducts(searchUrl);
   }
 
+  getProductDetail(theProductId: number): Observable<Product> {
+    // Need to buid URL based on product id:
+    //  http://localhost:8080/api/products/1
+    const productUrl = `${this.baseUrl}/${theProductId}`;
+
+    return this.httpClient.get<Product>(productUrl);
+  }
+
   private getProducts(searchUrl: string): Observable<Product[]> {
     return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
       map(response => response._embedded.products)
     );
   }
+  
 }
 // Unwraps the JSON from Spring Data REST _embedded entry
 interface GetResponseProducts{
