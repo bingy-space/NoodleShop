@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
 
   // Properties for pagination
   thePageNumber: number = 1;
-  thePageSize: number = 10;
+  thePageSize: number = 2;
   theTotalElements: number = 0;
 
   // Inject ProductService
@@ -57,6 +57,7 @@ export class ProductListComponent implements OnInit {
       // Get the "id" param string
       // Convert string to a number using the "+" symbol
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
+      console.log(this.currentCategoryId)
     }else{
       // No category id available, default to category "id" 0
       this.currentCategoryId = 0;
@@ -75,23 +76,19 @@ export class ProductListComponent implements OnInit {
 
     if(this.currentCategoryId == 0){
       // Method is invoked once you 'subscribe'
-      this.productService.getAllProductList().subscribe(
+      this.productService.getAllProductListPaginate(this.thePageNumber-1, this.thePageSize,).subscribe(
         data => {
           // Assign results data to the Product array
-          this.products = data;
+          this.products = data._embedded.products;
+          this.thePageNumber = data.page.number + 1;
+          this.thePageSize = data.page.size;
+          this.theTotalElements = data.page.totalElements;
           console.log(this.products)
         }
       )
     }
 
     // Now get the products for the given category id
-    // this.productService.getProductList(this.currentCategoryId).subscribe(
-    //   data => {
-    //     // Assign results data to the Product array
-    //     this.products = data;
-    //     console.log(this.products)
-    //   }
-    // )
     this.productService.getProductListPaginate(this.thePageNumber-1, this.thePageSize, this.currentCategoryId).subscribe(
       data => {
         this.products = data._embedded.products;
