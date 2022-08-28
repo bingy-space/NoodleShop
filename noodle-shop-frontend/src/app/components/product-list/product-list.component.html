@@ -15,11 +15,28 @@
 </div>
 
 <!-- Pagination -->
-<div class="d-flex flex-row-reverse bd-highlight">
+<div class="d-flex justify-content-end">
     <div class="p-2 bd-highlight">
         <ngb-pagination [(page)]="thePageNumber" [pageSize]="thePageSize" [collectionSize]="theTotalElements"
             (pageChange)="listProducts()">
         </ngb-pagination>
+    </div>
+
+    <div class="p-2 bd-highlight">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <span>Page Size</span>
+                </div>
+                <div class="col-6">
+                    <select class="form-select">
+                        <option value="">2</option>
+                        <option value="">3</option>
+                        <option value="">4</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
