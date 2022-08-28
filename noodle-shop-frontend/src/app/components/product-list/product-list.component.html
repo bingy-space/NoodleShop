@@ -14,6 +14,15 @@
     </div>
 </div>
 
+<!-- Pagination -->
+<div class="d-flex flex-row-reverse bd-highlight">
+    <div class="p-2 bd-highlight">
+        <ngb-pagination [(page)]="thePageNumber" [pageSize]="thePageSize" [collectionSize]="theTotalElements"
+            (pageChange)="listProducts()">
+        </ngb-pagination>
+    </div>
+</div>
+
 <!-- If products is empty, then display a message -->
 <div class="col-md-12" *ngIf="products?.length == 0">
     <img class="img-fluid mx-auto d-block" src="../../../assets/images/NoProductFound.png" alt="">
