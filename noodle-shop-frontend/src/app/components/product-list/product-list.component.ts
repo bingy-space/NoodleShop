@@ -12,7 +12,13 @@ export class ProductListComponent implements OnInit {
   // Set Property
   products: Product[] = [];
   currentCategoryId: number = 1;
+  previousCategoryId: number = 1;
   searchMode: boolean = false;
+
+  // Properties for pagination
+  thePageNumber: number = 1;
+  thePageSize: number = 10;
+  theTotalElements: number = 0;
 
   // Inject ProductService
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
@@ -56,6 +62,17 @@ export class ProductListComponent implements OnInit {
       this.currentCategoryId = 0;
     }
 
+    // Check if we have a different category than previous
+    // Note: Angular will reuse a component if it is currently being viewed
+
+    // If we have a different category id than previous, then set thePageNumber back to 1
+    if(this.previousCategoryId != this.currentCategoryId){
+      this.thePageNumber = 1;
+    }
+
+    this.previousCategoryId = this.currentCategoryId;
+    console.log(`currentCategoryId=${this.currentCategoryId}, thePageNumber=${this.thePageNumber}`);
+
     if(this.currentCategoryId == 0){
       // Method is invoked once you 'subscribe'
       this.productService.getAllProductList().subscribe(
@@ -68,12 +85,21 @@ export class ProductListComponent implements OnInit {
     }
 
     // Now get the products for the given category id
-    this.productService.getProductList(this.currentCategoryId).subscribe(
+    // this.productService.getProductList(this.currentCategoryId).subscribe(
+    //   data => {
+    //     // Assign results data to the Product array
+    //     this.products = data;
+    //     console.log(this.products)
+    //   }
+    // )
+    this.productService.getProductListPaginate(this.thePageNumber-1, this.thePageSize, this.currentCategoryId).subscribe(
       data => {
-        // Assign results data to the Product array
-        this.products = data;
-        console.log(this.products)
+        this.products = data._embedded.products;
+        this.thePageNumber = data.page.number + 1;
+        this.thePageSize = data.page.size;
+        this.theTotalElements = data.page.totalElements;
       }
     )
+
   }
 }
