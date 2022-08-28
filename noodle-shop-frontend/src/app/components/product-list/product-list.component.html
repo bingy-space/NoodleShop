@@ -29,10 +29,10 @@
                     <span>Page Size</span>
                 </div>
                 <div class="col-6">
-                    <select class="form-select">
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
+                    <select class="form-select" #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                        <option selected="true">2</option>
+                        <option>3</option>
+                        <option>4</option>
                     </select>
                 </div>
             </div>
