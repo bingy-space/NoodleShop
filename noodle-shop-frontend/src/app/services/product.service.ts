@@ -52,6 +52,15 @@ export class ProductService {
     return this.getProducts(searchUrl);
   }
 
+  searchProductPaginate(thePage: number, 
+                        thePageSize: number,
+                        theKeyword: string ): Observable<GetResponseProducts>{
+    // Need to build URL based on keyword, page and size
+    const searchUrl = `${this.baseUrl}findByNameContaining?name=${theKeyword}`+`&page=${thePage}&size=${thePageSize}`;
+    
+    return this.httpClient.get<GetResponseProducts>(searchUrl);
+  }
+
   getProductDetail(theProductId: number): Observable<Product> {
     // Need to buid URL based on product id:
     //  http://localhost:8080/api/products/1
