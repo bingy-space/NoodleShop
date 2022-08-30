@@ -17,8 +17,12 @@
 <!-- Pagination -->
 <div class="d-flex justify-content-end">
     <div class="p-2 bd-highlight">
-        <ngb-pagination [(page)]="thePageNumber" [pageSize]="thePageSize" [collectionSize]="theTotalElements"
-            (pageChange)="listProducts()">
+        <ngb-pagination [(page)]="thePageNumber" 
+                        [pageSize]="thePageSize" 
+                        [collectionSize]="theTotalElements" 
+                        [maxSize]="5" 
+                        [boundaryLinks]="true"
+                        (pageChange)="listProducts()">
         </ngb-pagination>
     </div>
 
