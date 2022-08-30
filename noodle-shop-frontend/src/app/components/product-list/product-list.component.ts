@@ -20,6 +20,8 @@ export class ProductListComponent implements OnInit {
   thePageSize: number = 2;
   theTotalElements: number = 0;
 
+  previousKeyword: string = "";
+
   // Inject ProductService
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
@@ -41,12 +43,23 @@ export class ProductListComponent implements OnInit {
 
   handleSearchProducts() {
     const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!;
+
+    // If we have a different keyword than previous, then set thePageNumber to 1
+    if(this.previousKeyword != theKeyword){
+      this.thePageNumber = 1;
+    }
+
+    this.previousKeyword = theKeyword;
+
     // Now search for the products using keyword
-    this.productService.searchProducts(theKeyword).subscribe(
-      data => {
-        this.products = data;
-      }
-    )
+    // this.productService.searchProducts(theKeyword).subscribe(
+    //   data => {
+    //     this.products = data;
+    //   }
+    // )
+    this.productService.searchProductPaginate(this.thePageNumber - 1,
+                                              this.thePageSize,
+                                              theKeyword).subscribe(this.processResult());
   }
 
   handleListProducts(){
@@ -65,7 +78,7 @@ export class ProductListComponent implements OnInit {
 
     // Check if we have a different category than previous
     // Note: Angular will reuse a component if it is currently being viewed
-
+    
     // If we have a different category id than previous, then set thePageNumber back to 1
     if(this.previousCategoryId != this.currentCategoryId){
       this.thePageNumber = 1;
@@ -76,33 +89,28 @@ export class ProductListComponent implements OnInit {
 
     if(this.currentCategoryId == 0){
       // Method is invoked once you 'subscribe'
-      this.productService.getAllProductListPaginate(this.thePageNumber-1, this.thePageSize,).subscribe(
-        data => {
-          // Assign results data to the Product array
-          this.products = data._embedded.products;
-          this.thePageNumber = data.page.number + 1;
-          this.thePageSize = data.page.size;
-          this.theTotalElements = data.page.totalElements;
-          console.log(this.products)
-        }
-      )
+      this.productService.getAllProductListPaginate(this.thePageNumber-1, 
+                                                    this.thePageSize,).subscribe(this.processResult());
     }
 
     // Now get the products for the given category id
-    this.productService.getProductListPaginate(this.thePageNumber-1, this.thePageSize, this.currentCategoryId).subscribe(
-      data => {
-        this.products = data._embedded.products;
-        this.thePageNumber = data.page.number + 1;
-        this.thePageSize = data.page.size;
-        this.theTotalElements = data.page.totalElements;
-      }
-    )
-
+    this.productService.getProductListPaginate(this.thePageNumber-1, 
+                                               this.thePageSize, 
+                                               this.currentCategoryId).subscribe(this.processResult());
   }
 
   updatePageSize(pageSize: string){
     this.thePageSize = +pageSize;
     this.thePageNumber = 1;
     this.listProducts();
+  }
+
+  processResult(){
+    return (data: any) => {
+      this.products = data._embedded.products;
+      this.thePageNumber = data.page.number + 1;
+      this.thePageSize = data.page.size;
+      this.theTotalElements = data.page.totalElements;
+    }
   }
 }
