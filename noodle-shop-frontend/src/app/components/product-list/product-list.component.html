@@ -1,13 +1,13 @@
 <div class="row row-cols-2 row-cols-md-4 g-2">
     <div *ngFor="let productList of products">
         <div class="col">
-            <div class="card" routerLink="/products/{{ productList.id }}">
+            <div class="card">
                 <img src="{{productList.imageUrl}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{ productList.name }}</h5>
+                    <h5 class="card-title" routerLink="/products/{{ productList.id }}">{{ productList.name }}</h5>
                     <p class="card-text">{{ productList.unitPrice | currency:'USD' }}</p>
                     <p class="card-text">Units In Stock: {{ productList.unitsInStock}}</p>
-
+                    <button (click)="addToCart(productList)">Add To Cart</button>
                 </div>
             </div>
         </div>
