@@ -40,5 +40,23 @@ export class CartService {
       // just add the item to the array
       this.cartItems.push(theCartItem);
     }
+
+    // Compute cart total price and tota; quantity
+    this. computeCartTotal();
+  }
+
+  computeCartTotal() {
+    let totalPriceValue: number = 0;
+    let totalQuantityValue: number = 0;
+
+    for(let currentCartItem of this.cartItems){
+      totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
+      totalQuantityValue += currentCartItem.quantity;
+    }
+
+    // Publish the new value
+    // All subscribers will receive the new data
+    this.totalPrice.next(totalPriceValue);
+    this.totalQuantity.next(totalQuantityValue);
   }
 }
