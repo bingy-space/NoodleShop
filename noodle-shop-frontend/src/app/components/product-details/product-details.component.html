@@ -12,7 +12,7 @@
         <h5>{{ product.unitPrice | currency: 'USD' }}</h5>
 
         <div class="d-grid gap-2">
-            <a class="btn btn-primary" type="button">Add to Cart</a>
+            <a (click)="addToCart()" class="btn btn-primary" type="button">Add to Cart</a>
         </div>
     </div>
   </div>
