@@ -1,4 +1,6 @@
 <div class="d-flex">
     <button>{{ totalPrice | currency: 'USD'}}</button> <button>{{ totalQuantity }}</button>
-    <i class="fa-solid fa-cart-shopping"></i>
+    <a routerLink="/cart-details">
+        <i class="fa-solid fa-cart-shopping"></i>
+    </a>
 </div>
