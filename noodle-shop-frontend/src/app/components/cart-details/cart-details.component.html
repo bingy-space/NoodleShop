@@ -7,13 +7,19 @@
               <th class="table-primary" scope="col" width="20%"></th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-
-            </tr>
-            <tr>
-
-            </tr>
+          <tbody *ngFor="let tempCartItem of cartItems">
+            <td>
+                <img src="{{ tempCartItem.imageUrl }}" alt="" class="img-responsive" width="150px">
+            </td>
+            <td>
+                <p>{{ tempCartItem.name }}</p>
+                <p>{{ tempCartItem.unitPrice | currency:'USD' }}</p>
+            </td>
+            <td>
+                <div class="items">
+                    <label for="">Quantity:</label> {{ tempCartItem.quantity }}
+                </div>
+            </td>
         </tbody>
     </table>
 </div>
