@@ -1,34 +1,40 @@
 <div class="mt-5">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-              <th class="table-primary" scope="col" width="20%">Product Image</th>
-              <th class="table-primary" scope="col" width="20%">Product Detail</th>
-              <th class="table-primary" scope="col" width="20%"></th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let tempCartItem of cartItems">
-            <td>
-                <img src="{{ tempCartItem.imageUrl }}" alt="" class="img-responsive" width="150px">
-            </td>
-            <td>
-                <p>{{ tempCartItem.name }}</p>
-                <p>{{ tempCartItem.unitPrice | currency:'USD' }}</p>
-            </td>
-            <td>
-                <div class="items">
-                    <label for="">Quantity:</label> {{ tempCartItem.quantity }}
-                </div>
-                <p>Subtotal: {{ tempCartItem.quantity * tempCartItem.unitPrice | currency: 'USD' }}</p>
-            </td>
-        </tbody>
-        <tbody>
-            <td colspan="2"></td>
-            <td>
-                <p>Total Quantity: {{ totalQuantity }} </p>
-                <p>Shipping: FREE</p>
-                <p>Total Price: {{ totalPrice | currency: 'USD' }}</p>
-            </td>
-        </tbody>
-    </table>
+    <div *ngIf="cartItems.length > 0">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th class="table-primary" scope="col" width="20%">Product Image</th>
+                  <th class="table-primary" scope="col" width="20%">Product Detail</th>
+                  <th class="table-primary" scope="col" width="20%"></th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let tempCartItem of cartItems">
+                <td>
+                    <img src="{{ tempCartItem.imageUrl }}" alt="" class="img-responsive" width="150px">
+                </td>
+                <td>
+                    <p>{{ tempCartItem.name }}</p>
+                    <p>{{ tempCartItem.unitPrice | currency:'USD' }}</p>
+                </td>
+                <td>
+                    <div class="items">
+                        <label for="">Quantity:</label> {{ tempCartItem.quantity }}
+                    </div>
+                    <p>Subtotal: {{ tempCartItem.quantity * tempCartItem.unitPrice | currency: 'USD' }}</p>
+                </td>
+            </tbody>
+            <tbody>
+                <td colspan="2"></td>
+                <td>
+                    <p>Total Quantity: {{ totalQuantity }} </p>
+                    <p>Shipping: FREE</p>
+                    <p>Total Price: {{ totalPrice | currency: 'USD' }}</p>
+                </td>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="cartItems.length == 0" class="alert alert-warning">
+        Empty Cart
+    </div>
+
 </div>
