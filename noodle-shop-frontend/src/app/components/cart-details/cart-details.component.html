@@ -3,12 +3,12 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                  <th class="table-primary" scope="col" width="20%">Product Image</th>
-                  <th class="table-primary" scope="col" width="20%">Product Detail</th>
-                  <th class="table-primary" scope="col" width="20%"></th>
+                    <th class="table-primary" scope="col" width="20%">Product Image</th>
+                    <th class="table-primary" scope="col" width="20%">Product Detail</th>
+                    <th class="table-primary" scope="col" width="20%"></th>
                 </tr>
-              </thead>
-              <tbody *ngFor="let tempCartItem of cartItems">
+            </thead>
+            <tbody *ngFor="let tempCartItem of cartItems">
                 <td>
                     <img src="{{ tempCartItem.imageUrl }}" alt="" class="img-responsive" width="150px">
                 </td>
@@ -18,8 +18,22 @@
                 </td>
                 <td>
                     <div class="items">
-                        <label for="">Quantity:</label> {{ tempCartItem.quantity }}
+                        <label for="">Quantity:</label>
                     </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                            <div class="col">
+                                <p> {{ tempCartItem.quantity }}</p>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary btn-sm"><i class="fa-solid fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
                     <p>Subtotal: {{ tempCartItem.quantity * tempCartItem.unitPrice | currency: 'USD' }}</p>
                 </td>
             </tbody>
