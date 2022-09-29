@@ -29,7 +29,7 @@
                                 <p> {{ tempCartItem.quantity }}</p>
                             </div>
                             <div class="col">
-                                <button class="btn btn-primary btn-sm"><i class="fa-solid fa-minus"></i></button>
+                                <button (click)="decrementQuantity(tempCartItem)" class="btn btn-primary btn-sm"><i class="fa-solid fa-minus"></i></button>
                             </div>
                         </div>
                     </div>
