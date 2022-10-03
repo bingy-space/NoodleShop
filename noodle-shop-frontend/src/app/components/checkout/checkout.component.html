@@ -1,1 +1,19 @@
-<p>checkout works!</p>
+<div class="container mt-5">
+  <h3>Checkout</h3>
+</div>
+<div class="container-fluid">
+    <form [formGroup]="checkoutFormGroup">
+        <!-- Customer Form Group -->
+        <div formControlName="customer" class="row g-3 align-items-center">
+            <div class="col-auto">
+              <label for="firstName" class="col-form-label">First Name</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" id="firstName" class="form-control" aria-describedby="firstName">
+            </div>
+        </div>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Purchase</button>
+
+    </form>
+</div>
