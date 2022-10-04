@@ -1,19 +1,105 @@
-<div class="container mt-5">
-  <h3>Checkout</h3>
-</div>
-<div class="container-fluid">
-    <form [formGroup]="checkoutFormGroup">
-        <!-- Customer Form Group -->
-        <div formControlName="customer" class="row g-3 align-items-center">
-            <div class="col-auto">
-              <label for="firstName" class="col-form-label">First Name</label>
-            </div>
-            <div class="col-auto">
-              <input type="text" id="firstName" class="form-control" aria-describedby="firstName">
-            </div>
-        </div>
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Purchase</button>
+<form [formGroup]="checkoutFormGroup" class="container" (ngSubmit)="onSubmit()">
+  <h4 class="my-4">
+    Checkout
+  </h4>
+  <!-- Customer Form Group -->
+  <div class="form-row" formGroupName="customer">
+    <div class="col-md-6 form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" id="firstname" placeholder="First Name" formControlName="firstName">
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" class="form-control" id="lastname" placeholder="Last Name" formControlName="lastName">
+    </div>
+  </div>
 
-    </form>
-</div>
+  <div class="form-group" formGroupName="customer">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" placeholder="you@example.com" formControlName="email" required>
+  </div>
+
+  <!-- <div class="form-group">
+    <label for="adress">Address</label>
+    <input type="text" class="form-control" id="adress" placeholder="1234 Main Street" required>
+  </div> -->
+
+  <!-- <div class="row">
+    <div class="col-md-4 form-group">
+      <label for="country">Country</label>
+      <select type="text" class="form-control" id="country">
+        <option value>Choose...</option>
+        <option>United Kingdom</option>
+      </select>
+      <div class="invalid-feedback">
+        Please select a valid country.
+      </div>
+    </div>
+
+    <div class="col-md-4 form-group">
+      <label for="city">City</label>
+      <select type="text" class="form-control" id="city">
+        <option value>Choose...</option>
+        <option>London</option>
+      </select>
+    </div>
+
+    <div class="col-md-4 form-group">
+      <label for="postcode">Postcode</label>
+      <select type="text" class="form-control" id="postcode">
+        <option value>Choose...</option>
+        <option>NW6 2LS</option>
+      </select>
+      <div class="invalid-feedback">
+        Postcode required.
+      </div>
+    </div>
+  </div> -->
+
+  <hr>
+  <!-- <h4 class="mb-4">Payment</h4>
+
+  <div class="form-check">
+    <input type="radio" class="form-check-input" id="credit" name="payment-method" checked required>
+    <label for="credit" class="form-check-label">Credit Card</label>
+  </div> -->
+
+  <!-- <div class="row mt-4">
+    <div class="col-md-6 form-group">
+      <label for="card-name">Name on card</label>
+      <input type="text" class="form-control" id="card-name" placeholder required>
+      <div class="invalid-feedback">
+        Name on card is required
+      </div>
+    </div>
+
+    <div class="col-md-6 form-group">
+      <label for="card-no">Card Number</label>
+      <input type="text" class="form-control" id="card-no" placeholder required>
+      <div class="invalid-feedback">
+        Credit card number is required
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="form-row">
+    <div class="col-md-5 form-group">
+      <label for="expiration">Expire Date</label>
+      <input type="text" class="form-control" id="card-name" placeholder required>
+      <div class="invalid-feedback">
+        Expiration date required
+      </div>
+    </div>
+
+    <div class="col-md-5 form-group">
+      <label for="ccv-no">Security Number</label>
+      <input type="text" class="form-control" id="sec-no" placeholder required>
+      <div class="invalid-feedback">
+        Security code required
+      </div>
+    </div>
+  </div> -->
+  <hr class="mb-4">
+  <!-- Submit Button -->
+  <button class="btn btn-primary bt-lg btn-block" type="submit">Purchase</button>
+</form>
