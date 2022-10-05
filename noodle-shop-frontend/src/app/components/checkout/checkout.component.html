@@ -22,7 +22,8 @@
   <!-- Shipping Address Form Group -->
   <div class="form-group" formGroupName="shippingAddress">
     <label for="adress">Address</label>
-    <input type="text" class="form-control" id="adress" placeholder="1234 Main Street" formControlName="street" required>
+    <input type="text" class="form-control" id="adress" placeholder="1234 Main Street" formControlName="street"
+      required>
   </div>
   <div class="row" formGroupName="shipping">
     <div class="col-md-4 form-group">
@@ -50,7 +51,48 @@
   </div>
 
   <hr>
-  
+  <!-- Add check box to copy shipping to billing -->
+  <div class="input-space">
+    <label for="" class="au-checkbox">
+      <input type="checkbox" (change)="copyShippingAddressToBillingAddress($event)">
+      <span> Billing Address same as Shipping Address</span>
+    </label>
+  </div>
+
+  <!-- Billing Address Form Group -->
+  <div class="form-group mt-4" formGroupName="billingAddress">
+    <label for="address">Billing Address</label>
+    <input type="text" class="form-control" id="address" placeholder="1234 Main Street" formControlName="street"
+      required>
+  </div>
+
+  <div class="row" formGroupName="shipping">
+    <div class="col-md-4 form-group">
+      <label for="city">City</label>
+      <select type="text" class="form-control" id="city" formControlName="city">
+        <option value>Choose...</option>
+      </select>
+    </div>
+    <div class="col-md-4 form-group">
+      <label for="city">State</label>
+      <select type="text" class="form-control" id="state" formControlName="state">
+        <option value>Choose...</option>
+      </select>
+    </div>
+    <div class="col-md-4 form-group">
+      <label for="country">Country</label>
+      <select type="text" class="form-control" id="country" formControlName="country">
+        <option value>Choose...</option>
+      </select>
+    </div>
+    <div class="col-md-4 form-group">
+      <label for="postcode">Postcode</label>
+      <input type="text" class="form-control" id="zipcode" formControlName="zipCode" required>
+    </div>
+  </div>
+
+  <hr>
+
   <!-- <h4 class="mb-4">Payment</h4>
 
   <div class="form-check">
