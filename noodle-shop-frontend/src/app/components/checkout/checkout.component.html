@@ -90,52 +90,52 @@
       <input type="text" class="form-control" id="zipcode" formControlName="zipCode" required>
     </div>
   </div>
-
   <hr>
 
-  <!-- <h4 class="mb-4">Payment</h4>
-
+  <!-- Credit Card Payment -->
+  <h4 class="mb-4">Payment: Credit Card</h4>
   <div class="form-check">
     <input type="radio" class="form-check-input" id="credit" name="payment-method" checked required>
     <label for="credit" class="form-check-label">Credit Card</label>
-  </div> -->
-
-  <!-- <div class="row mt-4">
+  </div>
+  <div class="row mt-4" formGroupName="creditCard">
     <div class="col-md-6 form-group">
       <label for="card-name">Name on card</label>
-      <input type="text" class="form-control" id="card-name" placeholder required>
-      <div class="invalid-feedback">
-        Name on card is required
-      </div>
+      <input type="text" class="form-control" id="card-name" formControlName="nameOnCard" required>
     </div>
-
     <div class="col-md-6 form-group">
       <label for="card-no">Card Number</label>
-      <input type="text" class="form-control" id="card-no" placeholder required>
-      <div class="invalid-feedback">
-        Credit card number is required
-      </div>
+      <input type="text" class="form-control" id="card-no" formControlName="cardNumber" required>
     </div>
-  </div> -->
-
-  <!-- <div class="form-row">
+    <div class="col-md-6 form-group">
+      <label for="card-no">Card Type</label>
+      <select type="text" class="form-control" id="country" formControlName="cardType">
+        <option>VISA</option>
+        <option>MASTERCARD</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row" formGroupName="creditCard">
     <div class="col-md-5 form-group">
-      <label for="expiration">Expire Date</label>
-      <input type="text" class="form-control" id="card-name" placeholder required>
-      <div class="invalid-feedback">
-        Expiration date required
-      </div>
+      <label for="expiration">Expire Month</label>
+      <select type="text" class="form-control" id="country" formControlName="expirationMonth">
+        <option>TO-DO</option>
+      </select>
     </div>
-
     <div class="col-md-5 form-group">
-      <label for="ccv-no">Security Number</label>
-      <input type="text" class="form-control" id="sec-no" placeholder required>
-      <div class="invalid-feedback">
-        Security code required
-      </div>
+      <label for="expiration">Expire Year</label>
+      <select type="text" class="form-control" id="country" formControlName="expirationYear">
+        <option>TO-DO</option>
+      </select>    </div>
+    <div class="col-md-5 form-group">
+      <label for="ccv-no">Security Code</label>
+      <input type="number" class="form-control" id="sec-no" formControlName="securityCode" required>
     </div>
-  </div> -->
-  <hr class="mb-4">
+  </div>
+  <hr>
+
+  <!-- Order Detail -->
+
   <!-- Submit Button -->
   <button class="btn btn-primary bt-lg btn-block" type="submit">Purchase</button>
 </form>
