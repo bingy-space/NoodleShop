@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ShopFormService } from 'src/app/services/shop-form.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,7 +13,10 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
-  constructor(private formBuilder: FormBuilder) { }
+  creditCardYears: number[] = [];
+  creditCardMonths: number[] = [];
+
+  constructor(private formBuilder: FormBuilder, private shopFormService: ShopFormService) { }
 
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
@@ -43,6 +47,18 @@ export class CheckoutComponent implements OnInit {
         expirationMonth: [''],
         expirationYear:['']
       })
+    });
+
+    // Populate Credit Card Months
+    const startMonth: number = new Date().getMonth() + 1;
+
+    this.shopFormService.getCreditCardMonths(startMonth).subscribe(data => {
+      this.creditCardMonths = data;
+    })
+
+    // Populate Credit Card Years
+    this.shopFormService.getCreditCardYears().subscribe(data => {
+      this.creditCardYears = data;
     })
   }
 
