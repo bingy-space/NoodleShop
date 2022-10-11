@@ -31,7 +31,7 @@ export class ShopFormService {
     const startYear: number = new Date().getFullYear();
     const endYear: number = startYear + 10;
 
-    for(let theYear = startYear; theYear <= endYear; theYear){
+    for(let theYear = startYear; theYear <= endYear; theYear++){
       data.push(theYear);
     }
 
