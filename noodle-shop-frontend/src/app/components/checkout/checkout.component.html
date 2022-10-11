@@ -66,7 +66,7 @@
       required>
   </div>
 
-  <div class="row" formGroupName="shipping">
+  <div class="row" formGroupName="billingAddress">
     <div class="col-md-4 form-group">
       <label for="city">City</label>
       <select type="text" class="form-control" id="city" formControlName="city">
@@ -117,15 +117,19 @@
   </div>
   <div class="form-row" formGroupName="creditCard">
     <div class="col-md-5 form-group">
-      <label for="expiration">Expire Month</label>
+      <label for="expiration">Expiration Month</label>
       <select type="text" class="form-control" id="country" formControlName="expirationMonth">
-        <option>TO-DO</option>
+        <option *ngFor="let month of creditCardMonths">
+          {{ month }}
+        </option>
       </select>
     </div>
     <div class="col-md-5 form-group">
-      <label for="expiration">Expire Year</label>
+      <label for="expiration">Expiration Year</label>
       <select type="text" class="form-control" id="country" formControlName="expirationYear">
-        <option>TO-DO</option>
+        <option *ngFor="let year of creditCardYears">
+          {{ year }}
+        </option>
       </select>    </div>
     <div class="col-md-5 form-group">
       <label for="ccv-no">Security Code</label>
@@ -146,3 +150,4 @@
   <!-- Submit Button -->
   <button class="btn btn-primary bt-lg btn-block" type="submit">Purchase</button>
 </form>
+
