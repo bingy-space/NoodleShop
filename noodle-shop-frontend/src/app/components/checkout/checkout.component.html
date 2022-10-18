@@ -41,7 +41,9 @@
     <div class="col-md-4 form-group">
       <label for="country">Country</label>
       <select type="text" class="form-control" id="country" formControlName="country">
-        <option value>Choose...</option>
+        <option *ngFor="let country of countries" [ngValue]="country">
+          {{ country.name }}
+        </option>
       </select>
     </div>
     <div class="col-md-4 form-group">
@@ -82,7 +84,9 @@
     <div class="col-md-4 form-group">
       <label for="country">Country</label>
       <select type="text" class="form-control" id="country" formControlName="country">
-        <option value>Choose...</option>
+        <option *ngFor="let country of countries" [ngValue]="country">
+          {{ country.name }}
+        </option>
       </select>
     </div>
     <div class="col-md-4 form-group">
