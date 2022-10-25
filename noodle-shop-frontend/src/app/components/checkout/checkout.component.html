@@ -48,6 +48,11 @@
     <label for="address">Address</label>
     <input type="text" class="form-control" id="adress" placeholder="1234 Main Street" formControlName="street"
       required>
+      <div *ngIf="shippingAddressStreet.invalid && (shippingAddressStreet.dirty || shippingAddressStreet.touched)" class="alert alert-danger mt-1">
+        <div *ngIf="shippingAddressStreet.errors?.['required'] || shippingAddressStreet.errors?.['notOnlyWhitespace']">
+          Street is required
+        </div>
+      </div>
   </div>
   <div class="row" formGroupName="shippingAddress">
     <div class="col-md-4 form-group">
@@ -55,6 +60,11 @@
       <select type="text" class="form-control" id="city" formControlName="city">
         <option value>Choose...</option>
       </select>
+      <div *ngIf="shippingAddressCity.invalid && (shippingAddressCity.dirty || shippingAddressCity.touched)" class="alert alert-danger mt-1">
+        <div *ngIf="shippingAddressCity.errors?.['required'] || shippingAddressCity.errors?.['notOnlyWhitespace']">
+          City is required
+        </div>
+      </div>
     </div>
     <div class="col-md-4 form-group">
       <label for="city">State</label>
@@ -63,6 +73,11 @@
           {{ state.name }}
         </option>
       </select>
+      <div *ngIf="shippingAddressState.invalid && (shippingAddressState.dirty || shippingAddressState.touched)" class="alert alert-danger mt-1">
+        <div *ngIf="shippingAddressState.errors?.['required'] || shippingAddressState.errors?.['notOnlyWhitespace']">
+          State is required
+        </div>
+      </div>
     </div>
     <div class="col-md-4 form-group">
       <label for="country">Country</label>
@@ -71,10 +86,20 @@
           {{ country.name }}
         </option>
       </select>
+      <div *ngIf="shippingAddressCountry.invalid && (shippingAddressCountry.dirty || shippingAddressCountry.touched)" class="alert alert-danger mt-1">
+        <div *ngIf="shippingAddressCountry.errors?.['required']">
+          Country is required
+        </div>
+      </div>
     </div>
     <div class="col-md-4 form-group">
       <label for="postcode">Postcode</label>
       <input type="text" class="form-control" id="zipcode" formControlName="zipCode" required>
+      <div *ngIf="shippingAddressZipCode.invalid && (shippingAddressZipCode.dirty || shippingAddressZipCode.touched)" class="alert alert-danger mt-1">
+        <div *ngIf="shippingAddressZipCode.errors?.['required'] || shippingAddressZipCode.errors?.['notOnlyWhitespace']">
+          ZipCode is required
+        </div>
+      </div>
     </div>
   </div>
 
