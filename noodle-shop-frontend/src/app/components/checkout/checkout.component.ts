@@ -13,7 +13,7 @@ import { ShopValidators } from 'src/app/validators/shop-validators';
 })
 export class CheckoutComponent implements OnInit {
   checkoutFormGroup: FormGroup;
-  
+
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
@@ -21,7 +21,7 @@ export class CheckoutComponent implements OnInit {
   creditCardMonths: number[] = [];
 
   countries: Country[] = [];
-  
+
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
 
@@ -49,12 +49,12 @@ export class CheckoutComponent implements OnInit {
         zipCode: new FormControl('', [Validators.required, Validators.minLength(2), ShopValidators.notOnlyWhiteSpace])
       }),
       creditCard: this.formBuilder.group({
-        cardType:[''],
-        nameOnCard:[''],
+        cardType: [''],
+        nameOnCard: [''],
         cardNumber: [''],
         securityCode: [''],
         expirationMonth: [''],
-        expirationYear:['']
+        expirationYear: ['']
       })
     });
 
@@ -73,16 +73,16 @@ export class CheckoutComponent implements OnInit {
     // Populate Countries
     this.shopFormService.getCountries().subscribe(
       data => {
-        console.log("Retrieved countries: "+JSON.stringify(data));
+        console.log("Retrieved countries: " + JSON.stringify(data));
         this.countries = data;
       }
     )
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log("Handling the submit button")
 
-    if(this.checkoutFormGroup.invalid){
+    if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
     }
 
@@ -90,32 +90,38 @@ export class CheckoutComponent implements OnInit {
   }
 
   // Getter methods to access customer form controls
-  get firstName(){ return this.checkoutFormGroup.get('customer.firstName');}
-  get lastName(){ return this.checkoutFormGroup.get('customer.lastName');}
-  get email(){ return this.checkoutFormGroup.get('customer.email');}
+  get firstName() { return this.checkoutFormGroup.get('customer.firstName'); }
+  get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
+  get email() { return this.checkoutFormGroup.get('customer.email'); }
   // Getter methods to access shipping form controls
-  get shippingAddressStreet(){ return this.checkoutFormGroup.get('shippingAddress.street');}
-  get shippingAddressCity(){ return this.checkoutFormGroup.get('shippingAddress.city');}
-  get shippingAddressState(){ return this.checkoutFormGroup.get('shippingAddress.state');}
-  get shippingAddressZipCode(){ return this.checkoutFormGroup.get('shippingAddress.zipCode');}
-  get shippingAddressCountry(){ return this.checkoutFormGroup.get('shippingAddress.country');}
+  get shippingAddressStreet() { return this.checkoutFormGroup.get('shippingAddress.street'); }
+  get shippingAddressCity() { return this.checkoutFormGroup.get('shippingAddress.city'); }
+  get shippingAddressState() { return this.checkoutFormGroup.get('shippingAddress.state'); }
+  get shippingAddressZipCode() { return this.checkoutFormGroup.get('shippingAddress.zipCode'); }
+  get shippingAddressCountry() { return this.checkoutFormGroup.get('shippingAddress.country'); }
+  // Getter methods to access billing form controls
+  get billingAddressStreet() { return this.checkoutFormGroup.get('billingAddress.street'); }
+  get billingAddressCity() { return this.checkoutFormGroup.get('billingAddress.city'); }
+  get billingAddressState() { return this.checkoutFormGroup.get('billingAddress.state'); }
+  get billingAddressZipCode() { return this.checkoutFormGroup.get('billingAddress.zipCode'); }
+  get billingAddressCountry() { return this.checkoutFormGroup.get('billingAddress.country'); }
 
 
-  copyShippingAddressToBillingAddress(event: Event){
+  copyShippingAddressToBillingAddress(event: Event) {
     const isChecked = (<HTMLInputElement>event.target).checked
-    if(isChecked){
+    if (isChecked) {
       this.checkoutFormGroup.controls['billingAddress'].setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
       // Bug fix for states
       this.billingAddressStates = this.shippingAddressStates;
     }
-    else{
+    else {
       this.checkoutFormGroup.controls['billingAddress'].reset();
       // Bug fix for states
       this.billingAddressStates = [];
     }
   }
 
-  handleMonthsAndYears(){
+  handleMonthsAndYears() {
     const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
 
     const currentYear: number = new Date().getFullYear();
@@ -124,10 +130,10 @@ export class CheckoutComponent implements OnInit {
     // If the current year equals the selected year, then start with the current month
     let startMonth: number;
 
-    if(currentYear ===  selectedYear){
+    if (currentYear === selectedYear) {
       // Get the current month
       startMonth = new Date().getMonth() + 1;
-    }else{
+    } else {
       startMonth = 1;
     }
 
@@ -137,16 +143,16 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-  getStates(formGroupName: string){
+  getStates(formGroupName: string) {
     const formGroup = this.checkoutFormGroup.get(formGroupName);
-    
+
     const countryCode = formGroup.value.country.code;
     const countryName = formGroup.value.country.name;
 
     this.shopFormService.getStates(countryCode).subscribe(data => {
-      if(formGroupName === 'shippingAddress'){
+      if (formGroupName === 'shippingAddress') {
         this.shippingAddressStates = data;
-      }else{
+      } else {
         this.billingAddressStates = data;
       }
 
