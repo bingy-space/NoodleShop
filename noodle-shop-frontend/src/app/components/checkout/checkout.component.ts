@@ -105,7 +105,11 @@ export class CheckoutComponent implements OnInit {
   get billingAddressState() { return this.checkoutFormGroup.get('billingAddress.state'); }
   get billingAddressZipCode() { return this.checkoutFormGroup.get('billingAddress.zipCode'); }
   get billingAddressCountry() { return this.checkoutFormGroup.get('billingAddress.country'); }
-
+  // Getter methods to access credit card form controls
+  get creditCartType() { return this.checkoutFormGroup.get('creditCard.cardType'); }
+  get creditCartNameOnCard() { return this.checkoutFormGroup.get('creditCard.nameOnCard'); }
+  get creditCartNumber() { return this.checkoutFormGroup.get('creditCard.cardNumber'); }
+  get creditCartSecurityCode() { return this.checkoutFormGroup.get('creditCard.securityCode'); }
 
   copyShippingAddressToBillingAddress(event: Event) {
     const isChecked = (<HTMLInputElement>event.target).checked
