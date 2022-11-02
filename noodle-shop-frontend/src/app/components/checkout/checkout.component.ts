@@ -31,6 +31,8 @@ export class CheckoutComponent implements OnInit {
               private cartService: CartService) { }
 
   ngOnInit(): void {
+    this.reviewCartDetails();
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', [Validators.required, Validators.minLength(2), ShopValidators.notOnlyWhiteSpace]),
@@ -90,6 +92,20 @@ export class CheckoutComponent implements OnInit {
     }
 
     console.log(this.checkoutFormGroup.get('customer').value);
+  }
+
+  // Cart Section
+  reviewCartDetails(){
+    // Subscribe to cartService.totalQuantity
+    this.cartService.totalQuantity.subscribe((data) => {
+        this.totalQuantity = data;
+      }
+    );
+    // Subscribe to cartService.totalPrice
+    this.cartService.totalPrice.subscribe((data) => {
+        this.totalPrice = data;
+      }
+    );
   }
 
   // Getter methods to access customer form controls
