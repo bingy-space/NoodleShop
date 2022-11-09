@@ -15,6 +15,6 @@ public class Purchase {
 	private Customer customer;
 	private Address shippingAddress;
 	private Address billingAddress;
-	private Order oredr;
+	private Order order;
 	private Set<OrderItem> orderItemrs;
 }
