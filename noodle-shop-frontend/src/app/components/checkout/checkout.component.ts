@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
@@ -28,7 +29,9 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, 
               private shopFormService: ShopFormService, 
-              private cartService: CartService) { }
+              private cartService: CartService,
+              private checkoutService: CheckoutComponent,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.reviewCartDetails();
