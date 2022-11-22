@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { Country } from 'src/app/common/country';
+import { Order } from 'src/app/common/order';
+import { OrderItem } from 'src/app/common/order-item';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
 import { ShopFormService } from 'src/app/services/shop-form.service';
@@ -95,6 +97,30 @@ export class CheckoutComponent implements OnInit {
     }
 
     console.log(this.checkoutFormGroup.get('customer').value);
+
+    // Setup order
+    let order = new Order();
+    order.totalPrice = this.totalPrice;
+    order.totalQuantity = this.totalQuantity;
+
+    // Get cart items
+    const cartItems = this.cartService.cartItems;
+
+    // Create orderItem from cartItems
+    let orderItems: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem));
+
+    // Setup purchase
+
+    // Populate purchase - customer
+
+    // Populate purchase - shipping address
+
+    // Populate purchase - billing address
+
+    // Populate purchase - order and orderItems
+
+    // Call REST API via the CheckoutService
+
   }
 
   // Cart Section
