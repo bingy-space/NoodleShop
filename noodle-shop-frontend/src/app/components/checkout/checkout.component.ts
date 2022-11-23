@@ -8,6 +8,7 @@ import { OrderItem } from 'src/app/common/order-item';
 import { Purchase } from 'src/app/common/purchase';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
+import { CheckoutService } from 'src/app/services/checkout.service';
 import { ShopFormService } from 'src/app/services/shop-form.service';
 import { ShopValidators } from 'src/app/validators/shop-validators';
 
@@ -33,7 +34,7 @@ export class CheckoutComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, 
               private shopFormService: ShopFormService, 
               private cartService: CartService,
-              private checkoutService: CheckoutComponent,
+              private checkoutService: CheckoutService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -131,8 +132,35 @@ export class CheckoutComponent implements OnInit {
     purchase.billingAddress.country = billingCountry.name;
 
     // Populate purchase - order and orderItems
+    purchase.order = order;
+    purchase.orderItems = orderItems;
 
     // Call REST API via the CheckoutService
+    this.checkoutService.placeOrder(purchase).subscribe(
+      {
+        next: response => {
+          alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber} `)
+          // Reset Cart
+          this.resetCart();
+        },
+        error: err => {
+          alert(`There was an error: ${err.message}`);
+        }
+      }
+    )
+  }
+
+  resetCart() {
+    // Reset cart Data
+    this.cartService.cartItems = [];
+    this.cartService.totalPrice.next(0);
+    this.cartService.totalQuantity.next(0);
+
+    // Reset the form
+    this.checkoutFormGroup.reset()
+
+    // Navigate back to the products page
+    this.router.navigateByUrl("/products");
 
   }
 
