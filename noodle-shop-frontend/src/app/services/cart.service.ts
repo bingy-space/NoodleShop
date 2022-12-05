@@ -10,8 +10,21 @@ export class CartService {
   cartItems: CartItem[] = [];
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
+
+  // Reference to web browser's session storage
+  storage: Storage = sessionStorage;
   
-  constructor() { }
+  constructor() {
+    // Read data from storage
+    let data = JSON.parse(this.storage.getItem('cartItems'));
+
+    if(data != null){
+      this.cartItems = data;
+
+      // Compute totals based on the data that is read from storage
+      this.computeCartTotal();
+    }
+  }
 
   addToCart(theCartItem: CartItem){
     // Check if we already have the item in cart
