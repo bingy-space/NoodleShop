@@ -67,6 +67,10 @@ export class CartService {
     this.totalQuantity.next(totalQuantityValue);
   }
 
+  persistCartItems(){
+    this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
+  }
+
   decrementQuantity(theCartItem: CartItem) {
     theCartItem.quantity--;
 
