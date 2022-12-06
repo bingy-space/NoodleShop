@@ -65,6 +65,9 @@ export class CartService {
     // All subscribers will receive the new data
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
+
+    // Persist cart data
+    this.persistCartItems();
   }
 
   persistCartItems(){
