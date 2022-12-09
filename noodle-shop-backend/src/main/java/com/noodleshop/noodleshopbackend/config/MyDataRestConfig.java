@@ -43,6 +43,10 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
  
         // call an internal helper method
         exposeId(config);
+        
+        // configure cors mapping
+        // with this, we can remove @CrossOrgin from JpaRepositories
+        cors.addMapping("/api/**").allowedOrigins("http://localhost:4200");
     }
 
 	private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
