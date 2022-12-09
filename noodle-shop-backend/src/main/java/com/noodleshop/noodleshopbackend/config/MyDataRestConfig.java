@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -22,6 +23,8 @@ import com.noodleshop.noodleshopbackend.entity.State;
 @Configuration
 public class MyDataRestConfig implements RepositoryRestConfigurer {
 	
+	@Value("${allowed.origins}")
+	private String[] theAllowedOrigins;	
 	private EntityManager entityManager;
 	
 	// Autowire JPA entity manager
@@ -46,7 +49,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         
         // configure cors mapping
         // with this, we can remove @CrossOrgin from JpaRepositories
-        cors.addMapping("/api/**").allowedOrigins("http://localhost:4200");
+        cors.addMapping(config.getBasePath() + "/**").allowedOrigins(theAllowedOrigins);
     }
 
 	private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
