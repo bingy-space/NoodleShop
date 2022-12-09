@@ -8,7 +8,7 @@ import com.noodleshop.noodleshopbackend.entity.ProductCategory;
 
 // Name of JSON entry: collectionResourceRel = "productCategory"
 // /product-category: path="product-category"
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 @RepositoryRestResource(collectionResourceRel = "productCategory", path="product-category")
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Long> {
 
