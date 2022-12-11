@@ -11,7 +11,7 @@ import com.noodleshop.noodleshopbackend.dto.Purchase;
 import com.noodleshop.noodleshopbackend.dto.PurchaseResponse;
 import com.noodleshop.noodleshopbackend.service.CheckoutService;
 
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/checkout")
 public class CheckoutController {
