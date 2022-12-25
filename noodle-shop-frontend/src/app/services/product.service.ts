@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Product } from '../common/product';
 import { ProductCategory } from '../common/product-category';
 
@@ -9,8 +10,8 @@ import { ProductCategory } from '../common/product-category';
 })
 export class ProductService {
 
-  private baseUrl = 'http://localhost:8080/api/products';
-  private categoryUrl = 'http://localhost:8080/api/product-category';
+  private baseUrl = environment.noodleShopApiUrl + '/products';
+  private categoryUrl = environment.noodleShopApiUrl + '/product-category';
 
   constructor(private httpClient: HttpClient) { }
 
