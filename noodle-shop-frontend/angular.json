@@ -83,6 +83,9 @@
             "production": {
               "browserTarget": "noodle-shop-frontend:build:production"
             },
+            "qa":{
+              "browserTarget": "noodle-shop-frontend:build:qa"
+            },
             "development": {
               "browserTarget": "noodle-shop-frontend:build:development"
             }
