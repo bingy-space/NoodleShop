@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  noodleShopApiUrl: "https://localhost:8443/api"
+  noodleShopApiUrl: "https://localhost:8443/api",
+  stripePublishableKey: "pk_test_51MJn2YFl63qAWV1KtMxaXxKl6WYWtuzJHgqHo2l17JumKIxBsERfzRW1D2PQnP8KxPpoYnxFb34qIWHY4nvYoSpd00wLybmq3e"
 };
 
 /*
