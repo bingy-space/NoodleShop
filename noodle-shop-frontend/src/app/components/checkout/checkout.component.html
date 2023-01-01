@@ -187,76 +187,15 @@
   <hr>
 
   <!-- Credit Card Payment -->
-  <h4 class="mb-4">Payment: Credit Card</h4>
-  <div class="form-check">
-    <input type="radio" class="form-check-input" id="credit" name="payment-method" checked required>
-    <label for="credit" class="form-check-label">Credit Card</label>
-  </div>
-  <div class="row mt-4" formGroupName="creditCard">
-    <div class="col-md-6 form-group">
-      <label for="card-name">Name on card</label>
-      <input type="text" class="form-control" id="card-name" formControlName="nameOnCard" required>
-      <div *ngIf="creditCardNameOnCard.invalid && (creditCardNameOnCard.dirty || creditCardNameOnCard.touched)" class="alert alert-danger mt-1">
-        <div *ngIf="creditCardNameOnCard.errors?.['required'] || creditCardNameOnCard.errors?.['notOnlyWhitespace']">
-            Name is required
-        </div>
-        <div *ngIf="creditCardNameOnCard.errors?.['minlength']">
-            Name must be at least 2 characters long
-        </div>
-      </div>
+  <h4 class="mb-4">Payment: Credit Card or Debit Card</h4>
+  <!-- Stripe Elements Credit Card -->
+  <div class="form-area" formGroupName="creditCard">
+    <div id="card-element">
+      <!-- Stripe element -->
+
     </div>
-    <div class="col-md-6 form-group">
-      <label for="card-no">Card Number</label>
-      <input type="text" class="form-control" id="card-no" formControlName="cardNumber" required>
-      <div *ngIf="creditCardNumber.invalid && (creditCardNumber.dirty || creditCardNumber.touched)" class="alert alert-danger mt-1">
-        <div *ngIf="creditCardNumber.errors?.['required'] || creditCardNumber.errors?.['notOnlyWhitespace']">
-            Credit Card Number is required
-        </div>
-        <div *ngIf="creditCardNumber.errors?.['pattern']">
-            Card number must be 16 digit long
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 form-group">
-      <label for="card-no">Card Type</label>
-      <select type="text" class="form-control" id="country" formControlName="cardType">
-        <option>VISA</option>
-        <option>MASTERCARD</option>
-      </select>
-      <div *ngIf="creditCardType.invalid && (creditCardType.dirty || creditCardType.touched)" class="alert alert-danger mt-1">
-        <div *ngIf="creditCardType.errors?.['required']">
-          Credit Card Type is required
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="form-row" formGroupName="creditCard">
-    <div class="col-md-5 form-group">
-      <label for="expiration">Expiration Month</label>
-      <select type="text" class="form-control" id="country" formControlName="expirationMonth">
-        <option *ngFor="let month of creditCardMonths">
-          {{ month }}
-        </option>
-      </select>
-    </div>
-    <div class="col-md-5 form-group">
-      <label for="expiration">Expiration Year</label>
-      <select type="text" class="form-control" id="country" formControlName="expirationYear" (change)="handleMonthsAndYears()">
-        <option *ngFor="let year of creditCardYears">
-          {{ year }}
-        </option>
-      </select>    </div>
-    <div class="col-md-5 form-group">
-      <label for="ccv-no">Security Code</label>
-      <input type="number" class="form-control" id="sec-no" formControlName="securityCode" required>
-      <div *ngIf="creditCardSecurityCode.invalid && (creditCardSecurityCode.dirty || creditCardSecurityCode.touched)" class="alert alert-danger mt-1">
-        <div *ngIf="creditCardSecurityCode.errors?.['required'] || creditCardSecurityCode.errors?.['notOnlyWhitespace']">
-            Security code is required
-        </div>
-        <div *ngIf="creditCardSecurityCode.errors?.['pattern']">
-            Security code must be 3 digit long
-        </div>
-      </div>
+    <!-- Used to display form errors -->
+    <div id="card-errors" class="displayError.textContent!=='': 'alert alert-danger mt-1'">
     </div>
   </div>
   <hr>
