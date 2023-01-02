@@ -106,9 +106,29 @@ export class CheckoutComponent implements OnInit {
       }
     )
   }
-  
+
   setupStripePaymentForm() {
-    throw new Error('Method not implemented.');
+    // Get a handle to Stripe elements
+    var elements = this.stripe.elements();
+
+    // Create a card element
+    this.cardElement = elements.create('card', {hidPostalCode: true});
+
+    // Add an instance of card UI component into the 'card-element' div
+    this.cardElement.mount('#card-element');
+
+    // Add event binding for the 'change' event on the card element
+    this.cardElement.on('change',(event: any) => {
+      // Get a handle to card-errors element
+      this.displayError = document.getElementById('card-errors');
+
+      if(event.complete){
+        this.displayError.textContent = "";
+      }else if(event.error){
+        // Show validation error to customer
+        this.displayError.textContent = event.error.message;
+      }
+    })
   }
 
   onSubmit() {
