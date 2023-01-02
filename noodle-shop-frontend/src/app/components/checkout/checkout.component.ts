@@ -5,12 +5,14 @@ import { of } from 'rxjs';
 import { Country } from 'src/app/common/country';
 import { Order } from 'src/app/common/order';
 import { OrderItem } from 'src/app/common/order-item';
+import { PaymentInfo } from 'src/app/common/payment-info';
 import { Purchase } from 'src/app/common/purchase';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { ShopFormService } from 'src/app/services/shop-form.service';
 import { ShopValidators } from 'src/app/validators/shop-validators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-checkout',
@@ -33,6 +35,12 @@ export class CheckoutComponent implements OnInit {
 
   storage: Storage = sessionStorage;
 
+  // Initialize Stripe API
+  stripe = Stripe(environment.stripePublishableKey);
+  paymentInfo: PaymentInfo = new PaymentInfo();
+  cardElement: any;
+  displayError: any = "";
+
   constructor(private formBuilder: FormBuilder, 
               private shopFormService: ShopFormService, 
               private cartService: CartService,
@@ -40,6 +48,9 @@ export class CheckoutComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    // Setup Stripe payment form
+    this.setupStripePaymentForm();
+
     this.reviewCartDetails();
 
     // Read the user's email address from browser storage
@@ -66,26 +77,26 @@ export class CheckoutComponent implements OnInit {
         zipCode: new FormControl('', [Validators.required, Validators.minLength(2), ShopValidators.notOnlyWhiteSpace])
       }),
       creditCard: this.formBuilder.group({
-        cardType: new FormControl('', [Validators.required]),
-        nameOnCard: new FormControl('', [Validators.required, Validators.minLength(2), ShopValidators.notOnlyWhiteSpace]),
-        cardNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
-        securityCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{3}')]),
-        expirationMonth: [''],
-        expirationYear: ['']
+        // cardType: new FormControl('', [Validators.required]),
+        // nameOnCard: new FormControl('', [Validators.required, Validators.minLength(2), ShopValidators.notOnlyWhiteSpace]),
+        // cardNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
+        // securityCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{3}')]),
+        // expirationMonth: [''],
+        // expirationYear: ['']
       })
     });
 
     // Populate Credit Card Months
-    const startMonth: number = new Date().getMonth() + 1;
+    // const startMonth: number = new Date().getMonth() + 1;
 
-    this.shopFormService.getCreditCardMonths(startMonth).subscribe(data => {
-      this.creditCardMonths = data;
-    })
+    // this.shopFormService.getCreditCardMonths(startMonth).subscribe(data => {
+    //   this.creditCardMonths = data;
+    // })
 
     // Populate Credit Card Years
-    this.shopFormService.getCreditCardYears().subscribe(data => {
-      this.creditCardYears = data;
-    })
+    // this.shopFormService.getCreditCardYears().subscribe(data => {
+    //   this.creditCardYears = data;
+    // })
 
     // Populate Countries
     this.shopFormService.getCountries().subscribe(
@@ -94,6 +105,10 @@ export class CheckoutComponent implements OnInit {
         this.countries = data;
       }
     )
+  }
+  
+  setupStripePaymentForm() {
+    throw new Error('Method not implemented.');
   }
 
   onSubmit() {
