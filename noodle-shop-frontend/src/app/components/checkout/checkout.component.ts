@@ -176,7 +176,7 @@ export class CheckoutComponent implements OnInit {
     purchase.orderItems = orderItems;
 
     // Compute payment info
-    this.paymentInfo.amount = this.totalPrice * 100;
+    this.paymentInfo.amount = Math.round(this.totalPrice * 100);
     this.paymentInfo.currency = "USD";
 
     // If valid form then
