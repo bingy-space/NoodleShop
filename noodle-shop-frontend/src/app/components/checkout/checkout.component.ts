@@ -41,6 +41,8 @@ export class CheckoutComponent implements OnInit {
   cardElement: any;
   displayError: any = "";
 
+  isDisabled: boolean = false;
+
   constructor(private formBuilder: FormBuilder, 
               private shopFormService: ShopFormService, 
               private cartService: CartService,
@@ -184,7 +186,9 @@ export class CheckoutComponent implements OnInit {
     // - Confirm card payment
     // - Place order
     if(!this.checkoutFormGroup.invalid && this.displayError.textContent === ""){
-      
+      // Before REST API calls, set to true
+      this.isDisabled = true;
+
       this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
         (paymentIntentResponse) => {
           this.stripe.confirmCardPayment(paymentIntentResponse.client_secret,{
@@ -207,6 +211,8 @@ export class CheckoutComponent implements OnInit {
             if(result.error){
               // Inform the customer there was an error
               alert(`There was an error: ${result.error.message}`);
+              // After REST API calls, set to false
+              this.isDisabled = false;
             }else{
               // Call REST API via the CheckoutService
               this.checkoutService.placeOrder(purchase).subscribe({
@@ -217,6 +223,7 @@ export class CheckoutComponent implements OnInit {
                   this.resetCart();
                 }, error: (err: any) => {
                   alert(`There was an error: ${err.message}`);
+                  this.isDisabled = false;
                 }
               })
             }
