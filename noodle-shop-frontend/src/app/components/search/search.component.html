@@ -1,11 +1,4 @@
-<div class="d-flex">
-    <input  #myInput
-            class="form-control me-2" 
-            type="text" 
-            placeholder="Search" 
-            aria-label="Search"
-            (keyup.enter)="doSearch(myInput.value)">
-    <button class="btn btn-outline-success" 
-            type="submit"
-            (click)="doSearch(myInput.value)">Search</button>
+<div class="input-group">
+        <input #myInput type="text" placeholder="Search.." class="form-control" name="search" (keyup.enter)="doSearch(myInput.value)">
+        <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
 </div>
